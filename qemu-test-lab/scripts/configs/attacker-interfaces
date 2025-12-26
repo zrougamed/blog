@@ -1,0 +1,55 @@
+# /etc/network/interfaces - Attacker/Testing VM
+# 
+# This configuration is for Alpine Linux
+# Copy to /etc/network/interfaces inside the attacker VM
+#
+# Network setup:
+# - eth0: Internal network (10.0.100.20/24)
+# - Gateway: 10.0.100.1 (gateway VM)
+
+auto lo
+iface lo inet loopback
+
+# Internal network interface
+auto eth0
+iface eth0 inet static
+    address 10.0.100.20
+    netmask 255.255.255.0
+    gateway 10.0.100.1
+
+# DNS configuration
+# Add to /etc/resolv.conf:
+#   nameserver 8.8.8.8
+#   nameserver 8.8.4.4
+
+# After configuration:
+#
+# 1. Apply network settings:
+#    rc-service networking restart
+#
+# 2. Test connectivity:
+#    ping 10.0.100.1          # Gateway
+#    ping 10.0.100.10         # App VM
+#    ping 8.8.8.8             # Internet (through gateway)
+#
+# 3. Configure hostname:
+#    echo "attacker" > /etc/hostname
+#    hostname -F /etc/hostname
+#
+# 4. Install security testing tools:
+#    apk update
+#    apk add nmap tcpdump hping3 netcat-openbsd curl wget
+#    apk add python3 py3-pip
+#
+# 5. Example security tests:
+#    # Port scan the app VM
+#    nmap -sV 10.0.100.10
+#    
+#    # TCP SYN flood test (be careful!)
+#    hping3 -S -p 80 --flood 10.0.100.10
+#    
+#    # Monitor traffic
+#    tcpdump -i eth0 -w /tmp/capture.pcap
+#    
+#    # Simple HTTP request
+#    curl http://10.0.100.10
