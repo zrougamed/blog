@@ -1,0 +1,31 @@
+# VM disk images (these are large and user-generated)
+images/*.qcow2
+images/*.img
+images/*.raw
+
+# ISO files (users download these themselves)
+iso/*.iso
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+.vscode/
+.idea/
+*.kate-swp
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
