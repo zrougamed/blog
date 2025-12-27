@@ -6,7 +6,7 @@
 set -e
 
 # Alpine version
-ALPINE_VERSION="3.19.1"
+ALPINE_VERSION="3.23.0"
 ALPINE_ARCH="x86_64"
 ALPINE_VARIANT="virt"  # Minimal virtual machine variant
 
